@@ -10,9 +10,9 @@ import { Data } from '../../providers/data'
 })
 export class MyDetailsPage {
 
-  myDatailsForm: FormGroup; 
+  myDetailsForm: FormGroup; 
 
-  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public dataService, Data) {
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public dataService: Data) {
     
     this.myDetailsForm = formBuilder.group({
       carRegistration: [''],

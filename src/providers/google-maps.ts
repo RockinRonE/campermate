@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Connectivity } from './connectivity'; 
 import { Geolocation } from 'ionic-native'; 
 
-declare var Google; 
+declare var google; 
 
 @Injectable()
 export class GoogleMaps {
@@ -92,7 +92,7 @@ export class GoogleMaps {
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
 
-        this.map = new Google.maps.Map(this.mapElement, mapOptions);
+        this.map = new google.maps.Map(this.mapElement, mapOptions);
         resolve(true);
       });
     });
@@ -140,7 +140,9 @@ export class GoogleMaps {
 
   changeMarker(lat: number, lng: number): void {
 
-    let latLng = new google.maps.Marker({
+    let latLng = new google.maps.LatLng(lat,lng);
+
+    let marker = new google.maps.Marker ({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: latLng
