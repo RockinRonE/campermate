@@ -11,7 +11,7 @@ import { Data } from '../../providers/data';
 export class CampDetailsPage {
   campDetailsForm: FormGroup; 
 
-  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public dataService: Data) {
+  constructor(public nav: NavController, public formBuilder: FormBuilder, public dataService: Data) {
 
     this.campDetailsForm = formBuilder.group({
       gateAccessCode: [''],
@@ -20,6 +20,25 @@ export class CampDetailsPage {
       phoneNumber: [''],
       departure: [''],
       notes: ['']
+    });
+
+    this.dataService.getCampDetails().then((details) => {
+      let savedDetails: any = false; 
+
+      if(details && typeof(details) != "undefined") {
+        savedDetails = JSON.parse(details); 
+      }
+
+      let formControls: any = this.campDetailsForm.controls; 
+
+      if(savedDetails) {
+        formControls.getAccessCode.setValue(savedDetails.gateAccessCode);
+        formControls.ammenitiesCode.setValue(savedDetails.ammenitiesCode);
+        formControls.wifiPassword.setValue(savedDetails.wifiPassword);
+        formControls.phoneNumber.setValue(savedDetails.phoneNumber);
+        formControls.departure.setValue(savedDetails.departure);
+        formControls.notes.setValue(savedDetails.notes);
+      }
     });
 
   }
